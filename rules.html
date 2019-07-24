@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>规则 Rules | 永存备忘公栈 Forever Notes Stack</title>
+    <style>
+      td, th{
+	  padding: 5px;
+
+      }
+    </style>
+  </head>
+  <body>
+
+    <a href="https://dist1.github.io/fns/index.html"><img src="https://dist1.github.io/fns/www/fns.png"></a>
+    
+    <h1>欢迎提交到永存备忘公栈（Forever Notes Stack，FNS）</h1>
+    
+    <p>
+      为了一个更好的信息环境，为了伟大的开源事业的发展，为了光荣的自由软件的永久昌盛，欢迎广大同圈、同道、一流将自己的原创技术、思想、概念有关的备忘集合到永存备忘公栈，以资保存和调用。
+    </p>
+
+    <p>LTaoist</p>
+    <p>2019 年 7 月 24 日</p>
+
+    <h2>一、编号方式与数据结构规则</h2>
+
+    <p>
+      已经收录的所有备忘录，设置一个唯一的永存备忘录栈识别码（Forever Notes Stack Code，FNS Code，或者FNS码）。
+    </p>
+
+    <p>
+      每一个FNS码采取：“FNS-数字”的格式，如FNS-1，FNS-2……
+    </p>
+
+    <p>
+      每一个FNS码对应一则FNS记录（FNS Record），这个Record的格式是这样子的：
+    </p>
+
+    <p>
+      <code><pre>
+	  struct FNSRecord{
+	      char* FNS_code;
+	      char* symbol_url;
+	      char* simplified_name;
+	      char* introduction;
+	      time_t submitted_time;
+	      int links_count;
+	      char** links_text;
+	      char** links_href;
+	      char* presenter_text;
+	      char* presenter_href;
+	  }
+      </pre></code>
+    </p>
+
+    <p>
+      解释如下：
+    </p>
+
+    <table border="1">
+      <thead>
+	<tr>
+	  <th>域名（Field Name）</th>
+	  <th>限制</th>
+	  <th>作用</th>
+	  <th>举例</th>
+	  <th>来源</th>
+	<tr>
+      </thead>
+      <tbody>
+	<tr>
+	  <td>
+	    FNS_code
+	  </td>
+	  <td>
+	    格式为 FNS + ‘-’ + 数字
+	  </td>
+	  <td>
+	    每个FNS记录的唯一标志符
+	  </td>
+	  <td>
+	    <p>
+	      FNS-1
+	    </p>
+	    <p>
+	      FNS:287
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      按规则编制分配
+	    </p>
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+	    symbol_url
+	  </td>
+	  <td>
+	    <p>
+	      是一个指向互联网上的图片格式（jpg或者png）文件的字符串。
+	    </p>
+	    <p>
+	      可使用FNS标识合成器合成。
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      用于这个文件的视觉标识。
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      https://www.baidu.com/img/baidu_jgylogo3.gif
+	      <br>
+	      (百度的标识）
+	    </p>
+	    <p>
+	      http://www.gov.cn/govweb/xhtml/2016gov/images/public/logo.jpg
+	      <br>
+	      （国务院国徽的标识）
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      文件提交者指定
+	    </p>
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+	    simplified_name
+	  </td>
+	  <td>
+	    <p>
+	      能够有助于相关人员的记忆和理解。（可以包括特殊符号和空格，不能包括 \0 ）
+	    </p>
+	  </td>
+	  <td>
+	    用于这个文件的人类可识别的字符串形式表示。
+	  </td>
+	  <td>
+	    <p>
+	      PEPL
+	    </p>
+	    <p>
+	      Bob Lama 测试 | Challenge From Bob Lama
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      文件提交者指定
+	    </p>
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+	    introduction
+	  </td>
+	  <td>
+	    <p>
+	      不得与文件内容无关。
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      说明这个文件的大体内容，包含部分，有什么用途，面向什么问题等等。
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      另一种软件许可证。
+	    </p>
+	    <p>
+	      《跨硬件软件描述语言》手册。
+	    </p>
+	  </td>
+	  <td>
+	    文件提交者编写
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+	    submitted_time
+	  </td>
+	  <td>
+	    <p>
+	      只精确到年月日。
+	    </p>
+	    <p>
+	      不得早于这个文件首次提交的时间。
+	    </p>
+	  </td>
+	  <td>
+	    反映这个文件首次进入提交程序的时间。
+	  </td>
+	  <td>
+	    <p>
+	      1563844665532
+	      <br>
+	      （2019年7月23日）
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      按规则生成
+	    </p>
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+	    links_count
+	  </td>
+	  <td>
+	    <p>
+	      至少一个不多于10个。
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      关联的链接数量。
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      1
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      根据文件提交者的提交按规则生成
+	    </p>
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+	    links_text
+	  </td>
+	  <td>
+	    <p>
+	      links_text指向字符串数。
+	    </p>
+	    <p>
+	      *links_text 指向字符串。
+	    </p>
+	    <p>
+	      每一个 *links_text 和 *links_href 一一对应，是这个链接的说明和标示。
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      用于记录关联的链接的字符串说明。
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      <code>
+<pre>  [
+  “github.repo”
+  ]</pre>
+	      </code>
+	      
+	    </p>
+	    <p>
+		<code>
+<pre>  [
+  “文档”
+  ]</pre>
+		</code>
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      根据文件提交者的提交按规则生成
+	    </p>
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+	    links_href
+	  </td>
+	  <td>
+	    <p>
+	      links_text指向字符串数。
+	    </p>
+	    <p>
+	      *links_text 指向字符串。
+	    </p>
+	    <p>
+	      每一个 *links_text 和 *links_href 一一对应，是这个链接的指向的url地址。
+	    </p>
+	  </td>
+	  <td>
+	    用于记录关联的链接的指向。
+	  </td>
+	  <td>
+	    <p>
+		<code>
+<pre>  [
+  “https://github.com/dist1/Pudding-Eater-Prerogative-License”
+  ]</pre>
+		</code>
+	    </p>
+	    <p>	      
+	      <code>
+<pre>  [
+  “https://dist1.github.io/kuayingjianruanjianmiaoshuyuyan/”
+  ]</pre>
+	      </code>
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      根据文件提交者的提交按规则生成
+	    </p>
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+	    presenter_text
+	  </td>
+	  <td>
+	    <p>
+	      指向字符串。
+	    </p>
+	    <p>
+	      冒充他人不受保护。
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      用于标署提交人。
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      ltaoist
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      提交人自己签署
+	    </p>
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+	    presenter_href
+	  </td>
+	  <td>
+	    <p>
+	      指向字符串。
+	    </p>
+	    <p>
+	      指向提交人的相关个人页面。
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      用于指导读者的进一步联系提交人。
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      https://dist1.github.io/ltaoist/
+	    </p>
+	  </td>
+	  <td>
+	    <p>
+	      提交人自己指定
+	    </p>
+	  </td>
+      </tbody>
+    </table>
+    
+    <h2>二、相关操作和收录限制</h2>
+
+    <h3>（一）违反人类公义或宣传落后反动思想的判定</h3>
+
+    <p>1.明显的违反人类公义或宣传落后反动思想。</p>
+    
+    <p>2.根据相关人士学者专家判定，有充分的理由认为违反人类公义或宣传落后反动思想。</p>
+    
+    <p>3.根据FNS管理员的判定，认为违反人类公义或宣传落后反动思想。</p>
+
+    <h3>（二）鼓励提交的内容</h3>
+    
+    <p>1.不期望成为国家标准或世界标准，无纳入正规国际学术体系的准备，但认为有可观的学理意义或应用价值。</p>
+
+    <p>2.能够反应某种重大问题的阶段性进展，或者能够反应某种重大过程中的重要问题，具有一定的独创性和系统性。</p>
+
+    <p>3.涉及重大公共利益，公共政策或其他与公共权利相关。</p>
+
+    <p>4.已经完成、相对稳定的重要版本、修正、补充、完善或解释。</p>
+
+    <h3>（三）追溯、举报和抹除</h3>
+
+    <p>1.已经收录的文件原则上向全人类公开，接受全人类的监督，但在旧版本中收录的和版本控制系统中保存着的，不再追溯。</p>
+
+    <p>2.对于判定为应该退出的情况，每个人可以向FNS管理员举报，在新版本中予以抹除。</p>
+
+    <h2>三、应用程序接口</h2>
+
+    <p>FNS客户端和FNS的API不收取任何费用，不日进行编码、构建、上线，使用GPLv3发布。</p>
+
+    <h2>四、应用场景</h2>
+
+    <p>（一）复杂部门集成。涉及多个部门、多个事业的统筹规划，已经形成一种具有全局意义的内部共识，准备进入更高级阶段的活动，通过FNS获得一个唯一的、公共的文档编码带动整体的同步和进步。</p>
+
+    <p>（二）自主体系发布。已经完成了一种自主体系的顶层设计，已经完成某种面向公共的协议或系统的设计，通过FNS获得一个唯一的、公共的文档编码完成系统投放的第一步。</p>
+
+    <p>（三）稳定方法控制。如设计了一个算法，已经相对成熟稳定，且无予以商业化或投报学术类地点的打算，通过FNS获得一个唯一的、公共的文档编码保存方法的相关信息。</p>
+
+    <h2>五、FNS地址与FNS负责人</h2>
+
+    <p>
+      dist1地址： <a href="https://dist1.github.io">https://dist1.github.io</a>
+    </p>
+
+    <p>
+      FNS总负责人地址（ltaoist）：<a href="https://dist1.github.io/ltaoist/">https://dist1.github.io/ltaoist/</a>
+    </p>
+
+    <p>
+      FNS地址：<a href="https://dist1.github.io/fns/index.html">https://dist1.github.io/fns/index.html</a>
+    </p>
+
+    <p>
+      总负责人：LTaoist
+    </p>
+
+    <p>
+      审核统筹委员：LTaoist
+    </p>
+    
+    <p>
+      学科建设委员：招募中
+    </p>
+    
+    <p>
+      工程推进委员：招募中
+    </p>
+    
+    <p>
+      公共关系委员：招募中
+    </p>
+    
+    <p>
+      文学策划委员：招募中
+    </p>
+    
+    <p>
+      活动组织委员：招募中
+    </p>
+    
+    <p>
+      用户联系委员：招募中
+    </p>
+    
+    <p>
+      由于相关人员自身的故意的不当操作、不在或不由FNS负责人承担能力范围、经FNS负责人判定没有责任的事项，FNS的负责人可以不采取任何措施。
+    </p>
+    
+    <p>
+      保留一切责任和义务的追溯，本文件自2019年7月24日起开始生效。
+    </p>
+
+    <hr>
+
+    <a href="https://dist1.github.io/fns/index.html"><img src="https://dist1.github.io/fns/www/fns.png"></a>
+    
+  </body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>永存备忘公栈 Forever Notes Stack</title>
+    <style>
+      body{
+	  font-size: 12px;
+	  color: #333;
+	  background: #fff;
+	  padding-top: 40px;
+      }
+
+      a{
+	  color: #111;
+	  text-decoration: none;
+      }
+
+      .wrapper{
+	  width: 75%;
+	  min-width: 960px;
+	  margin: 0 auto;
+	  position: relative;
+      }
+      
+      .fns-record{
+	  border: 1px solid #cccccc;
+	  margin-bottom: 20px;
+	  position: relative;
+	  padding-right: 40px;
+	  min-height: 300px;
+	  background: #fff;
+      }
+      
+      .fns-record img{
+	  width: 220px;
+	  max-width: 220px;
+	  max-height: 220px;
+	  position: absolute;
+	  left: 10px;
+	  top: 10px;
+      }
+
+      .fns-record{
+	  padding-left: 270px;
+      }
+
+      .fns-record h3{
+	  color: #00adb8;
+      }
+
+      .text{
+	  font-size: 14px;
+      }
+
+      .col1{
+	  padding-right: 278px;
+      }
+
+      .col2{
+	  position: absolute;
+	  right: 0;
+	  top: 0;
+	  width: 238px;
+	  text-align: center;
+	  min-height: 1000px;
+	  padding-top: 10px;	  
+	  line-height: 1;
+      }
+
+      .header_zh{
+	  font-size: 18px;
+      }
+      
+      .header_en{
+	  font-size: 16px;
+      }
+      
+      .header_link{
+	  font-size: 16px;
+	  text-decoration: underline;
+      }
+
+      .color{
+	  /*	  color: #ff2; */
+      }
+
+      .cover{
+	  font-size: 20px;
+	  margin: 20px 0 80px 0;
+	  line-height: 30px;
+      }
+
+      .cover a{
+	  line-height: 25px;
+      }
+
+      .block{
+      }
+
+      .sbm_time{
+      }
+
+      .intro1{
+	  line-height: 3;
+      }
+
+      .quote{
+	  width: 200px;
+	  margin: 0 auto;
+      }
+
+      .line1, .presenter {
+	  color: #b283b6;
+	  text-decoration: underline;
+	  font-weight: bold;
+      }
+
+      .stacktop .line1{
+      }
+
+      .links{
+	  margin-bottom: 40px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="fns-records col1">
+	{% for rec in topcs %}
+	<div class="fns-record{% if loop.index0 == 0 %} stacktop{% endif %}">
+	  <div class="symobl">
+	    <img src="{{ rec.symbol_url }}">
+	  </div>
+	  <div class="text">
+	    <div class="title">
+	      <a href="record.html?fns_code=FNS-{{rec.ans_code}}">
+		<h3>
+		  <span class="fns_code">FNS-{{ rec.ans_code }}</span> : <span class="sname">{{ rec.simplified_name }}</span>
+		</h3>
+	      </a>
+	    </div>
+	    <p class="line1">
+	      <span class="sbm_time">{{ rec.submitted_time|dtstring }}</span> ， 由 <a class="presenter" href="{{ rec.presenter_href }}">{{ rec.presenter_text }}</a> 提交
+	    </p>
+	    <div class="intro">
+	      {{ rec.introduction }}
+	      <br>
+	      <ul class="links">
+		{% for li in rec.links %}
+		<li><a href={{ li.href }}>{{ li.text }}</a></li>
+		{% endfor %}
+	      </ul>
+	    </div>
+	  </div>
+	</div>
+	{% endfor %}
+      </div>
+      <div class="col2">
+	<div class="int">
+	  <p class="intro1">
+	    <b>原创技术文档统一非正式官方入口</b>
+	    <br>
+	    <b>开放技术和自由软件的工程联合</b>
+	    <br>
+	    <b>全领域多界别第三方高质量技术体系</b>
+	  </p>
+	  <hr>
+	  <div class="block cover">
+	    <h1 class="header_zh">永存备忘公栈</h1>
+	    <h1 class="header_en"><span class="color">F</span>orever <span class="color">N</span>otes <span class="color">S</span>tack</h1>
+	    <h1 class="header_link">https://dist1.github.io/fns</h1>
+	    <div>
+	      <a href="https://github.com/dist1/fns/labels/%E5%BB%BA%E8%AE%BE%E8%AE%BA%E5%9D%9B"> ➥ 建设论坛</a>
+	    </div>
+	    <div>
+	      <a href="https://github.com/dist1/fns/issues/new?assignees=&labels=%E6%96%B0%E7%9A%84%E6%8F%90%E4%BA%A4&template=new_submit.md&title=%E6%96%B0%E7%9A%84%E6%8F%90%E4%BA%A4%EF%BC%9A%5Bsimplified_name%5D"> ➥ 新的提交</a>
+	    </div>
+	    <div>
+	      <a target="_blank" href="https://dist1.github.io/fns/rules.html"> ➥ 查看规则</a>
+	    </div>
+	    <div>
+	      <a href="https://github.com/dist1/fns/issues/new?assignees=&labels=%E4%BF%A1%E6%81%AF%E4%B8%BE%E6%8A%A5&template=info_report.md&title=%28%E4%B8%BE%E6%8A%A5%29+%3A+%3C%E6%A0%87%E9%A2%98%3E+"> ➥ 信息举报</a>
+	    </div>
+	  </div>
+	  <img src="www/fns.png" class="quote">
+	</div>
+      </div>
+    </div>
+  </body>
+</html>
