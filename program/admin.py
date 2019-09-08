@@ -26,7 +26,7 @@ LIB_RANGE = [
 
 EMPTY = '''\
 {
-	"ans_code": "<RULE>",
+	"fns_code": "<RULE>",
 	"symbol_url": "url",
 	"simplified_name": "",
 	"introduction": "",
@@ -105,9 +105,9 @@ def get_FNSRecord(fns_code, remote=False):
 def merge_fns(empty, to_merge_filepath):
     erc = get_FNSRecord(empty)
     tmc = json.loads(open(to_merge_filepath).read())
-    if erc['ans_code'] != '<RULE>':
+    if erc['fns_code'] != '<RULE>':
         raise ValueError('Merge to a not empty record(fns-%d.json).' % empty)
-    erc['ans_code'] = empty
+    erc['fns_code'] = empty
     print('Merge %s to fns-%d.json' % (to_merge_filepath, empty))
     for field in [
             "symbol_url",
@@ -185,8 +185,8 @@ def gen_front():
     nlines = len(gen.splitlines())
     print("Gen index.html done. (%d lines)" % nlines)
 
-gen_front()
-exit(1)
+#gen_front()
+#exit(1)
 
 class Admin(object):
 
@@ -224,6 +224,9 @@ amdin.py make_newempty
 //  * At least 1 Link (text, href)
 //  * Presenter (text, href)
 admin.py merge %fns_code %filepath_to_merge''')
+
+    def gen_front(self):
+        gen_front()
 
 
 if __name__ == '__main__':
